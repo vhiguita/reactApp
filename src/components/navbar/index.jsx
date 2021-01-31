@@ -5,7 +5,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Image from 'react-bootstrap/Image';
-import CarWidget from './../carwidget/CarWidget';
+import CarWidget from './../carwidget/index';
 import { NavItem } from 'react-bootstrap';
 
 const NavbarComponent = () =>{
@@ -45,7 +45,7 @@ const NavbarComponent = () =>{
           </Nav>
         
         </Navbar.Collapse>
-        <NavItem><CarWidget></CarWidget></NavItem>
+        <NavItem><CarWidget/></NavItem>
       </Navbar>
    </>
    

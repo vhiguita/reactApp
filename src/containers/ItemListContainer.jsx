@@ -1,10 +1,12 @@
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-const ItemListContainer = (props) =>{
+import ItemCount from './../components/itemcount/index';
+const ItemListContainer = ({greeting}) =>{
   return (
      
     <>
-     <div className="h1">{props.greeting}</div>
+     <div className="h1">{greeting}</div>
+     <ItemCount stock="5" initial="1"/>
     </>
    
   );
