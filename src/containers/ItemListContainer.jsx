@@ -12,7 +12,7 @@ const ItemListContainer = ({greeting}) =>{
     alert('agregando  al carrito.');
   }*/
   useEffect(() => {
-    console.log(categoryId);
+    //console.log(categoryId);
     const promesa = new Promise ((resolve, reject) => {
        setTimeout( () => {
         resolve(
