@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './itemdetail.css';
 import ItemCount from '../itemcount/index';
 
 const ItemDetail = ({item}) =>{
-  function onAdd(){
-    alert('agregando  al carrito.');
+  //const [quantity, setQuantity] = useState(0);
+  const [goCart, setGoCart] = useState(false);
+  function onAdd(q){
+    alert('agregando  al carrito: '+q);
+    //setQuantity(q);
+    setGoCart(true);
   }
   const formatter = new Intl.NumberFormat('en-US', {
      style: 'currency',
@@ -24,7 +29,9 @@ const ItemDetail = ({item}) =>{
        <h3 style={{textAlign: "center"}}>{item.name}</h3>
        <p><strong>Descripción:</strong> {item.description}</p>
        <p><strong>Precio:</strong> {formatter.format(item.price)}</p>
-       <ItemCount stock={item.stock} initial={1} onAdd={onAdd}/>
+       {goCart ? <div style={{ padding: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '300px'}}>
+        <Link to='/cart'><button style={{width: '100px', height: '60px', minWidth: '200px', display:'block'}}>Terminar compra</button></Link>
+       </div>: <ItemCount stock={item.stock} initial={1} onAdd={onAdd}/>}
       </div>
 
       </>

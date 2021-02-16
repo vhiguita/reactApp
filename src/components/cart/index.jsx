@@ -5,7 +5,6 @@ const Cart = () =>{
   return (
 
     <>
-    <button><img src={window.location.origin +'/cart.svg'} alt="Carro de compras"/></button>
     </>
 
   );

@@ -19,23 +19,23 @@ const ItemCount = (props) =>{
   }
 
   return (
-     
+
     <>
     <div style={{ padding: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '300px' }}>
     <button onClick={onDecrease}>-</button>
-   
+
     <p style={{width: '100px', display:'block', textAlign: 'center'}}>{count}</p>
     <button onClick={onIncrease}>+</button>
-    
+
     </div>
     <div style={{ padding: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '300px'}}>
-      <div><button style={{width: '100px', height: '60px', minWidth: '200px', display:'block'}} onClick={props.onAdd}>Agregar al carrito</button>
+      <div><button style={{width: '100px', height: '60px', minWidth: '200px', display:'block'}} onClick={()=>{props.onAdd(count)}}>Agregar al carrito</button>
       </div>
     </div>
-    
-    
+
+
     </>
-   
+
   );
 }
 
