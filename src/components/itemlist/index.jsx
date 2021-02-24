@@ -2,7 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Item from '../item/index';
 const ItemList = ({products}) =>{
-
+  //console.log(products);
   return (
     <>
       <div>

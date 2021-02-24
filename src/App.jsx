@@ -6,27 +6,29 @@ import NavbarComponent from './components/navbar/index';
 import ItemListContainer from './containers/ItemListContainer';
 import ItemDetailContainer from './containers/ItemDetailContainer';
 import Cart from './components/cart/index';
+import CartContext from './context/cartContext';
 
 const App = () =>{
   return (
     <>
       <BrowserRouter>
-      <NavbarComponent/>
-      {/* <ItemListContainer greeting="Este es el listado de productos."/>*/}
-      <Switch>
-       <Route exact path="/">
-        <ItemListContainer/>
-       </Route>
-       <Route exact path="/category/:categoryId">
-        <ItemListContainer/>
-       </Route>
-       <Route exact path="/item/:id">
-        <ItemDetailContainer/>
-       </Route>
-       <Route exact path="/cart">
-        <Cart/>
-       </Route>
-      </Switch>
+      <CartContext>
+        <NavbarComponent/>
+        <Switch>
+         <Route exact path="/">
+          <ItemListContainer/>
+         </Route>
+         <Route exact path="/category/:categoryId">
+          <ItemListContainer/>
+         </Route>
+         <Route exact path="/item/:id">
+          <ItemDetailContainer/>
+         </Route>
+         <Route exact path="/cart">
+          <Cart/>
+         </Route>
+        </Switch>
+      </CartContext>  
       </BrowserRouter>
     </>
 

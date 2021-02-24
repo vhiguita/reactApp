@@ -33,7 +33,7 @@ const ItemListContainer = ({greeting}) =>{
          products = e;
       }
       setProducts(products);
-      console.log(products);
+      //console.log(products);
     });
   }, [categoryId]);
 

@@ -1,16 +1,21 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './itemdetail.css';
 import ItemCount from '../itemcount/index';
+import {cartContext} from '../../context/cartContext';
 
 const ItemDetail = ({item}) =>{
   //const [quantity, setQuantity] = useState(0);
   const [goCart, setGoCart] = useState(false);
+  const { addItem, product } = useContext(cartContext);
+
+
   function onAdd(q){
     alert('agregando  al carrito: '+q);
     //setQuantity(q);
     setGoCart(true);
+    addItem( {item:item, quantity:q} );
   }
   const formatter = new Intl.NumberFormat('en-US', {
      style: 'currency',
