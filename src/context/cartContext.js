@@ -94,6 +94,7 @@ function CartContext({children}){
       clear,
       isCartEmpty,
       totalPrice,
+      numProd,
      }}>
      {children}
     </cartContext.Provider>

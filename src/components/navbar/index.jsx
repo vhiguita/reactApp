@@ -1,18 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import timer from './timer.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './navbar.css';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Image from 'react-bootstrap/Image';
 import CartWidget from './../cartwidget/index';
-//import Cart from './../cart/index';
+import {cartContext} from '../../context/cartContext';
 import { NavItem } from 'react-bootstrap';
 import products from './products';
 
 const NavbarComponent = () =>{
   const [category, setCategory] = useState([]);
+  const { isCartEmpty, numProd } = useContext(cartContext);
   useEffect(() => {
     //console.log(id);
     const promesa = new Promise ((resolve, reject) => {
@@ -53,7 +55,7 @@ const NavbarComponent = () =>{
           </Nav>
 
         </Navbar.Collapse>
-        <NavItem><CartWidget/></NavItem>
+        <NavItem>{ isCartEmpty ? <></> : <div className="cart rounded-circle">{numProd}</div>} <CartWidget/></NavItem>
       </Navbar>
    </>
 
