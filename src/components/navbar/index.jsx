@@ -9,6 +9,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Image from 'react-bootstrap/Image';
 import CartWidget from './../cartwidget/index';
 import {cartContext} from '../../context/cartContext';
+import { getFirestore } from '../../firebase/index';
 import { NavItem } from 'react-bootstrap';
 import products from './products';
 
@@ -16,22 +17,41 @@ const NavbarComponent = () =>{
   const [category, setCategory] = useState([]);
   const { isCartEmpty, numProd } = useContext(cartContext);
   useEffect(() => {
-    //console.log(id);
-    const promesa = new Promise ((resolve, reject) => {
-       setTimeout( () => {
-        resolve(products)
-      }, 1000);
+
+    // const promesa = new Promise ((resolve, reject) => {
+    //    setTimeout( () => {
+    //     resolve(products)
+    //   }, 1000);
+    // });
+    //
+    // promesa.then( e => {
+    //   let categories = [];
+    //   products.map(category => {
+    //                 var findCategory = categories.find(x => x.categoryId === category.categoryId);
+    //                 if (!findCategory)
+    //                     categories.push(category);
+    //   });
+    //   setCategory(categories);
+    // });
+    const db = getFirestore();
+    const itemCollection = db.collection("categories");
+    itemCollection.get().then((querySnapshot) =>{
+       if(querySnapshot.size === 0){
+         console.log('No results!');
+       }
+
+       let aux = querySnapshot.docs.map(doc => {
+
+            return { ...doc.data(), categoryId: doc.id };
+       });
+       console.log('---CAT-------');
+       console.log(aux);
+       setCategory(aux);
+    }).catch((error) =>{
+      console.log(error);
+    }).finally(() =>{
     });
 
-    promesa.then( e => {
-      let categories = [];
-      products.map(category => {
-                    var findCategory = categories.find(x => x.categoryId === category.categoryId);
-                    if (!findCategory)
-                        categories.push(category);
-      });
-      setCategory(categories);
-    });
   }, []);
   return (
    <>
