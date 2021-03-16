@@ -65,7 +65,7 @@ const NavbarComponent = () =>{
             <NavDropdown title="Relojes" id="basic-nav-dropdown">
                {category.map((cat)=>{
 
-                return <NavDropdown.Item><Link to={`/category/${cat.categoryId}`}>{cat.categoryName}</Link></NavDropdown.Item>
+                return <NavDropdown.Item><Link to={`/category/${cat.categoryName}`}>{cat.categoryName}</Link></NavDropdown.Item>
 
                 })}
               {/*<NavDropdown.Item><Link to="/category/1">Relojes Automáticos</Link></NavDropdown.Item>

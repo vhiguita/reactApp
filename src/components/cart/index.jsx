@@ -18,9 +18,11 @@ const Cart = () =>{
   });
   const [numOrder, setNumOrder] = useState('');
   const [isOrderCreated, setOrderCreated] = useState(false);
+  //const [isValid, setIsValid] = useState(true);
   const [datos, setDatos] = useState({
         name: '',
-        mail: '',
+        email: '',
+        emailConfirmation: '',
         phone: ''
    });
    const handleInputChange = (event) => {
@@ -54,27 +56,65 @@ const Cart = () =>{
     removeItem(id);
   }
   function newOrder(){
-    alert('enviando datos...' + datos.name + ' ' + datos.email + ' ' + datos.phone);
-    const db = getFirestore();
-    const orders = db.collection("orders");
-    const newOrder_ = {
-      buyer:{ name: datos.name, phone: datos.phone, email: datos.email},
-      items: product,
-      date:firebase.firestore.Timestamp.fromDate(new Date()),
-      total: totalPrice,
+   // setIsValid(true);
+   let isValid = true;
+   console.log('enviando datos...' + datos.name + ' ' + datos.email + ' ' + datos.phone);
+   console.log(datos.name);
+    let msg = '';
+    if (datos.name === '' || datos.name === null) {
+        msg = msg + 'El nombre no puede ser vacío';
+        isValid = false;
     }
-    orders.add(newOrder_).then(({ id }) =>{
-      setNumOrder(id);
-      setOrderCreated(true);
-      setTimeout(() => setOrderCreated(false),
-        5000
-      );
-      clear();
-    }).catch(err => {
-       console.log(err);
-    }).finally(() => {
+    if (datos.phone === '' || datos.phone === null) {
+      if(msg===''){
+        msg = msg + 'El teléfono no puede ser vacío';
+      }else{
+        msg = msg + ', el teléfono no puede ser vacío';
+      }
+      isValid = false;
+    }
+    if (datos.email === '' || datos.email === null) {
+      if(msg===''){
+        msg = msg + 'El correo electrónico no puede ser vacío';
+      }else{
+        msg = msg + ', el correo electrónico no puede ser vacío';
+      }
+      isValid = false;
+    }else if(datos.email !== datos.emailConfirmation) {
+      if(msg===''){
+        msg = msg + 'Ambos correos electrónicos deben coincidir';
+      }else{
+        msg = msg + ', ambos correos electrónicos deben coincidir';
+      }
+      isValid = false;
+    }
+    console.log(isValid);
+    console.log(msg);
+    if(isValid){
+      const db = getFirestore();
+      const orders = db.collection("orders");
+      const newOrder_ = {
+        buyer:{ name: datos.name, phone: datos.phone, email: datos.email},
+        items: product,
+        date:firebase.firestore.Timestamp.fromDate(new Date()),
+        total: totalPrice,
+      }
+      orders.add(newOrder_).then(({ id }) =>{
+        setNumOrder(id);
+        setOrderCreated(true);
+        setTimeout(() => setOrderCreated(false),
+          5000
+        );
+        clear();
+      }).catch(err => {
+         console.log(err);
+      }).finally(() => {
 
-    });
+      });
+    }else{
+      alert(msg);
+    }
+
   }
   return (
 
@@ -100,6 +140,9 @@ const Cart = () =>{
         </div>
         <div className="col-md-3">
           <input type="text" placeholder="Email" className="form-control" onChange={handleInputChange} name="email" />
+        </div>
+        <div className="col-md-3">
+          <input type="text" placeholder="Confirm Email" className="form-control" onChange={handleInputChange} name="emailConfirmation" />
         </div>
        </form>
        }

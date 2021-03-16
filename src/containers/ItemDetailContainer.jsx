@@ -8,6 +8,7 @@ import { getFirestore } from '../firebase/index';
 const ItemDetailContainer = () =>{
   const { id } = useParams();
   const [item, setItem] = useState({});
+  const [productNotFound, setProductNotFound] = useState(false);
   useEffect(() => {
     console.log(id);
     // const promesa = new Promise ((resolve, reject) => {
@@ -39,15 +40,12 @@ const ItemDetailContainer = () =>{
            console.log('--- { ITEM } ---');
            console.log("Document data:", product);
            setItem(product);
+           setProductNotFound(false);
          } else {
              // doc.data() will be undefined in this case
              console.log("No such document!");
+             setProductNotFound(true);
          }
-
-         /*product = querySnapshot.docs.map(doc => {
-
-              return { ...doc.data(), id: doc.id };
-         });*/
 
       }).catch((error) =>{
         console.log(error);
@@ -62,7 +60,10 @@ const ItemDetailContainer = () =>{
 
     <>
       {/* <ItemCount stock={5} initial={1} onAdd={onAdd}/>*/}
-      <ItemDetail item={item}/>
+      {productNotFound ?
+        <><h5 style={{textAlign: "center", color:"red"}}>El producto no existe en la base de datos.</h5></>
+        :<ItemDetail item={item}/>
+      }
     </>
 
   );

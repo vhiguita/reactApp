@@ -7,6 +7,7 @@ import ItemListContainer from './containers/ItemListContainer';
 import ItemDetailContainer from './containers/ItemDetailContainer';
 import Cart from './components/cart/index';
 import CartContext from './context/cartContext';
+import Order from './components/order/index';
 
 const App = () =>{
   return (
@@ -27,8 +28,11 @@ const App = () =>{
          <Route exact path="/cart">
           <Cart/>
          </Route>
+         <Route exact path="/order">
+          <Order/>
+         </Route>
         </Switch>
-      </CartContext>  
+      </CartContext>
       </BrowserRouter>
     </>
 
