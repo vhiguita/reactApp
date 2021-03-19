@@ -17,8 +17,9 @@ const Cart = () =>{
      minimumFractionDigits: 0
   });
   const [numOrder, setNumOrder] = useState('');
+  const [msg, setMsg] = useState('');
   const [isOrderCreated, setOrderCreated] = useState(false);
-  //const [isValid, setIsValid] = useState(true);
+  const [isVal, setIsVal] = useState(true);
   const [datos, setDatos] = useState({
         name: '',
         email: '',
@@ -58,9 +59,10 @@ const Cart = () =>{
   function newOrder(){
    // setIsValid(true);
    let isValid = true;
+   let msg = '';
    console.log('enviando datos...' + datos.name + ' ' + datos.email + ' ' + datos.phone);
    console.log(datos.name);
-    let msg = '';
+
     if (datos.name === '' || datos.name === null) {
         msg = msg + 'El nombre no puede ser vacío';
         isValid = false;
@@ -111,8 +113,12 @@ const Cart = () =>{
       }).finally(() => {
 
       });
+      setIsVal(true);
+      setMsg('');
     }else{
-      alert(msg);
+      //alert(msg);
+      setIsVal(false);
+      setMsg(msg);
     }
 
   }
@@ -145,6 +151,10 @@ const Cart = () =>{
           <input type="text" placeholder="Confirm Email" className="form-control" onChange={handleInputChange} name="emailConfirmation" />
         </div>
        </form>
+       }
+       {isVal ?
+         <></>
+         :<h5 style={{textAlign: "center", color:"red"}}>{msg}</h5>
        }
 
        <table id='product'>

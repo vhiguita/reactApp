@@ -8,6 +8,7 @@ import {cartContext} from '../../context/cartContext';
 const ItemDetail = ({item}) =>{
   //const [quantity, setQuantity] = useState(0);
   const [goCart, setGoCart] = useState(false);
+
   const { addItem, product } = useContext(cartContext);
 
 
@@ -22,7 +23,6 @@ const ItemDetail = ({item}) =>{
      currency: 'USD',
      minimumFractionDigits: 0
   });
-
   try{
   if(isNaN(item.price)===false){
     return (
@@ -36,7 +36,8 @@ const ItemDetail = ({item}) =>{
        <p><strong>Precio:</strong> {formatter.format(item.price)}</p>
        {goCart ? <div style={{ padding: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '300px'}}>
         <Link to='/cart'><button style={{width: '100px', height: '60px', minWidth: '200px', display:'block'}}>Terminar compra</button></Link>
-       </div>: <ItemCount stock={item.stock} initial={1} onAdd={onAdd}/>}
+        </div>:<ItemCount stock={item.stock} initial={1} onAdd={onAdd}/>
+       }
       </div>
 
       </>

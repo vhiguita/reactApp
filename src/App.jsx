@@ -8,6 +8,8 @@ import ItemDetailContainer from './containers/ItemDetailContainer';
 import Cart from './components/cart/index';
 import CartContext from './context/cartContext';
 import Order from './components/order/index';
+import Login from './components/login/index';
+import Register from './components/register/index';
 
 const App = () =>{
   return (
@@ -30,6 +32,12 @@ const App = () =>{
          </Route>
          <Route exact path="/order">
           <Order/>
+         </Route>
+         <Route exact path="/login">
+          <Login/>
+         </Route>
+         <Route exact path="/register">
+          <Register/>
          </Route>
         </Switch>
       </CartContext>
