@@ -11,20 +11,20 @@ const Item = (props) =>{
  //     currency: 'USD',
  //     minimumFractionDigits: 0
  //  });
- useEffect(() => {
-    if(props.stock===0){
-      setIsCartVisible(false);
-    }
-  }, []);
+ // useEffect(() => {
+ //    if(props.stock===0){
+ //      setIsCartVisible(false);
+ //    }
+ //  }, []);
   return (
 
     <>
     <div className='card'>
      <img src={props.image}/>
      <h3 style={{textAlign: "center"}}>{props.name}</h3>
-     {isCartVisible ?<Link to={`/item/${props.id}`}> {/* que nos lleve al detalle del libro pormedio del id */}
+     {isCartVisible ?<Link to={`/item/${props.id}`}>
             <h4 style={{textAlign: "center"}}>Ver producto</h4>
-      </Link>:<h5 style={{textAlign: "center", color:"red"}}>Producto agotado.</h5>}
+      </Link>:<></>/*<h5 style={{textAlign: "center", color:"red"}}>Producto agotado.</h5>*/}
      {/* <p>Precio: {formatter.format(props.price)}</p>*/}
     </div>
 

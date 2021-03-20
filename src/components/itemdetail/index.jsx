@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './itemdetail.css';
@@ -9,11 +9,20 @@ import firebase from 'firebase/app';
 import '@firebase/firestore';
 
 const ItemDetail = ({item}) =>{
+  console.log("........");
+  console.log(item.stock);
   //const [quantity, setQuantity] = useState(0);
   const [goCart, setGoCart] = useState(false);
-
+  const [isEmptyStock, setIsEmptyStock] = useState(false);
   const { addItem, product } = useContext(cartContext);
-
+  useEffect(() => {
+    console.log("#########");
+    console.log(item.stock);
+    if(item.stock===0){
+        console.log("is empty");
+        setIsEmptyStock(true);
+    }
+  }, [item]);
 
   function onAdd(q){
     alert('agregando  al carrito: '+q);
@@ -27,6 +36,7 @@ const ItemDetail = ({item}) =>{
      minimumFractionDigits: 0
   });
   try{
+
   if(isNaN(item.price)===false){
     return (
 
@@ -39,7 +49,7 @@ const ItemDetail = ({item}) =>{
        <p><strong>Precio:</strong> {formatter.format(item.price)}</p>
        {goCart ? <div style={{ padding: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '300px'}}>
         <Link to='/cart'><button style={{width: '100px', height: '60px', minWidth: '200px', display:'block'}}>Terminar compra</button></Link>
-        </div>:<ItemCount stock={item.stock} initial={1} onAdd={onAdd}/>
+        </div>:<div>{isEmptyStock ? <h5 style={{textAlign: "center", color:"red"}}>Producto agotado.</h5>:<ItemCount stock={item.stock} initial={1} onAdd={onAdd}/>}</div>
        }
       </div>
 

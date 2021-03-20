@@ -120,6 +120,20 @@ function CartContext({children}){
     return product.findIndex(prod =>prod.item.id === id);
   }
   const clear = () =>{
+    let i = 0;
+    const db = getFirestore();
+    const itemCollection = db.collection("items");
+    while(i<product.length){
+      let id = product[i].item.id;
+      console.log(id);
+      console.log(i);
+      let docRef = db.collection("items").doc(id);
+
+      let updateStock = docRef.update({
+         stock: product[i].item.stock + product[i].quantity
+      });
+      i = i + 1;
+    }
     setProduct([]);
     setTotalPrice(0);
     setIsCartEmpty(true);

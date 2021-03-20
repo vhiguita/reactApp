@@ -71,7 +71,7 @@ const NavbarComponent = () =>{
               {/*<NavDropdown.Item><Link to="/category/1">Relojes Automáticos</Link></NavDropdown.Item>
               <NavDropdown.Item><Link to="/category/2">Relojes de Pila</Link></NavDropdown.Item>*/}
             </NavDropdown>
-            <Nav.Link href="#contact">Contacto</Nav.Link>
+            {/*<Nav.Link href="#contact">Contacto</Nav.Link>*/}
           </Nav>
 
         </Navbar.Collapse>
