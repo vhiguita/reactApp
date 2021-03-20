@@ -52,9 +52,9 @@ const Cart = () =>{
     console.log('Vaciando carro de compras:');
     clear();
   }
-  function removeItemFromCart(id){
+  function removeItemFromCart(id,q){
     //alert(id);
-    removeItem(id);
+    removeItem(id,q);
   }
   function newOrder(){
    // setIsValid(true);
@@ -178,7 +178,7 @@ const Cart = () =>{
                          <td>{formatter.format(prod.item.price * prod.quantity)}</td>
                          <td><img className="image" src={prod.item.image}/></td>
                          <td className='opration'>
-                             <button onClick={()=>{removeItemFromCart(prod.item.id)}}>Eliminar</button>
+                             <button onClick={()=>{removeItemFromCart(prod.item.id,prod.quantity)}}>Eliminar</button>
                          </td>
                      </tr>
                   )})}

@@ -4,6 +4,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './itemdetail.css';
 import ItemCount from '../itemcount/index';
 import {cartContext} from '../../context/cartContext';
+import { getFirestore } from '../../firebase/index';
+import firebase from 'firebase/app';
+import '@firebase/firestore';
 
 const ItemDetail = ({item}) =>{
   //const [quantity, setQuantity] = useState(0);
