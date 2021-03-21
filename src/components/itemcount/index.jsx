@@ -4,6 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const ItemCount = (props) =>{
   const [count, setCount] = useState(props.initial);
   let nStock = props.stock;
+  //console.log(".................");
+  //console.log(nStock);
   //const [nStock, setStock] = useState(props.stock); //Stock disponible
   function onDecrease(){
     if(count>1){

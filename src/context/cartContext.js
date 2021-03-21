@@ -15,6 +15,7 @@ function CartContext({children}){
   const[product,setProduct] = useState([]);
   const[totalPrice, setTotalPrice] = useState(0);
   const[numProd, setNumProd] = useState(0);
+  //const [nStock, setStock] = useState(item.item.stock); //Stock disponible
 
   const addItem = (item) => {
     console.log(item);

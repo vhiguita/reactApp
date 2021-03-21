@@ -9,8 +9,8 @@ import firebase from 'firebase/app';
 import '@firebase/firestore';
 
 const ItemDetail = ({item}) =>{
-  console.log("........");
-  console.log(item.stock);
+  //console.log("........");
+  //console.log(item.stock);
   //const [quantity, setQuantity] = useState(0);
   const [goCart, setGoCart] = useState(false);
   const [isEmptyStock, setIsEmptyStock] = useState(false);
