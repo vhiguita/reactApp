@@ -19,14 +19,14 @@ const NavbarComponent = () =>{
   const [category, setCategory] = useState([]);
   //const [isLogged, setIsLogged] = useState(false);
   const { isCartEmpty, numProd, isLogged, setLogged } = useContext(cartContext);
-  //let mail = window.localStorage.getItem('email');
+  let mail = window.localStorage.getItem('email');
   //console.log('mail:'+mail);
   useEffect(() => {
-    /*if(mail !== null){
-       setIsLogged(true);
+    if(mail !== null){
+       setLogged(true);
     }else{
-       setIsLogged(false);
-    }*/
+       setLogged(false);
+    }
     // const promesa = new Promise ((resolve, reject) => {
     //    setTimeout( () => {
     //     resolve(products)

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './itemcount.css';
 
 const ItemCount = (props) =>{
   const [count, setCount] = useState(props.initial);
@@ -31,7 +32,7 @@ const ItemCount = (props) =>{
 
     </div>
     <div style={{ padding: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '300px'}}>
-      <div><button style={{width: '100px', height: '60px', minWidth: '200px', display:'block'}} onClick={()=>{props.onAdd(count)}}>Agregar al carrito</button>
+      <div><button className="btnAdd" onClick={()=>{props.onAdd(count)}}>Agregar al carrito</button>
       </div>
     </div>
 

@@ -1,0 +1,22 @@
+ul {
+  font-size: 0;
+  list-style: none;
+  width: 100%;
+  display: block;  /* Remove bullet points; allow greater control of positioning */
+  padding: 0;      /* Override defaults for lists */
+  margin: 0;
+  /*padding-left: 0px;*/
+}
+ul li {
+  display: inline-block;
+  width: 33.3%;
+  text-align: center;
+}
+@media (max-width: 960px) and (min-width: 641px) {
+    ul li { width: 50%; } /* Show 2 logos per row on medium devices (tablets, phones in landscape) */
+}
+@media (max-width: 640px) {
+  ul li {
+    width: 100%;
+  }
+}

@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { getFirestore } from '../../firebase/index';
 import firebase from 'firebase/app';
 import '@firebase/firestore';
+import './register.css';
 
 const Register = () =>{
   const [isVal, setIsVal] = useState(true);
@@ -104,7 +105,7 @@ const Register = () =>{
   return (
 
     <>
-      <form onSubmit={handleSubmit}>
+      <form className="f" onSubmit={handleSubmit}>
       <div className="form-group">
         <input type="text" placeholder="Nombre" className="form-control" name="name" onChange={handleInputChange}/>
       </div>
@@ -118,7 +119,7 @@ const Register = () =>{
          <input type="password" placeholder="Confirmar Contraseña" className="form-control" name="pwdConfirmation" onChange={handleInputChange}/>
        </div>
        <div className="form-group">
-         <input type="submit" value="Registrarse" className="btn btn-success" />
+         <input type="submit" value="Registrarse" className="button" />
        </div>
        <div className="form-group">
          <Link to={`/login`}>

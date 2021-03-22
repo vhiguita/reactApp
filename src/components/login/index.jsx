@@ -5,6 +5,7 @@ import { getFirestore } from '../../firebase/index';
 import firebase from 'firebase/app';
 import '@firebase/firestore';
 import {cartContext} from '../../context/cartContext';
+import './login.css';
 
 const Login = () =>{
   const history = useHistory();
@@ -76,7 +77,7 @@ const Login = () =>{
 
   return (
     <>
-    <form onSubmit={handleSubmit}>
+    <form className="f" onSubmit={handleSubmit}>
      <div className="form-group">
        <input type="text" placeholder="Email" className="form-control" name="email" onChange={handleInputChange}/>
      </div>
@@ -84,7 +85,7 @@ const Login = () =>{
        <input type="password" placeholder="Contraseña" className="form-control" name="pwd" onChange={handleInputChange}/>
      </div>
      <div className="form-group">
-       <input type="submit" value="Iniciar" className="btn btn-success"/>
+       <input type="submit" value="Iniciar" className="button"/>
      </div>
      <div className="form-group">
        <Link to={`/register`}>

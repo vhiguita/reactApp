@@ -42,13 +42,13 @@ const ItemDetail = ({item}) =>{
 
       <>
 
-      <div className='card'>
+      <div className='_card'>
        <img src={item.image}/>
        <h3 style={{textAlign: "center"}}>{item.name}</h3>
        <p><strong>Descripción:</strong> {item.description}</p>
        <p><strong>Precio:</strong> {formatter.format(item.price)}</p>
        {goCart ? <div style={{ padding: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '300px'}}>
-        <Link to='/cart'><button style={{width: '100px', height: '60px', minWidth: '200px', display:'block'}}>Terminar compra</button></Link>
+        <Link to='/cart'><button className="btnF">Terminar compra</button></Link>
         </div>:<div>{isEmptyStock ? <h5 style={{textAlign: "center", color:"red"}}>Producto agotado.</h5>:<ItemCount stock={item.stock} initial={1} onAdd={onAdd}/>}</div>
        }
       </div>

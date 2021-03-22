@@ -1,6 +1,14 @@
-.card {
-  border: 1px solid black;
-  border-radius: 0.25rem;
-  width: 300px;
+.card_{
+  /*border: 1px solid black;
+  border-radius: 0.25rem;*/
+  width: 310px;
   margin: 10px;
+}
+@media (max-width: 640px) {
+  .card_{
+    /*border: 1px solid black;
+    border-radius: 0.25rem;*/
+    width: 95%;
+    margin: 10px;
+  }
 }

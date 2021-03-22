@@ -1,10 +1,4 @@
-._card {
-  /*border: 1px solid black;*/
-  border-radius: 0.25rem;
-  width: 310px;
-  margin: auto;
-}
-.btnF{
+.btnAdd{
   width: 200px;
   height: 60px;
   min-width: 200px;
@@ -17,7 +11,7 @@
     width: 95%;
     margin: 10px;
   }
-  .btnF{
+  .btnAdd{
     width: 100%;
   }
 }

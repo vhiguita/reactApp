@@ -20,9 +20,9 @@ const Item = (props) =>{
   return (
 
     <>
-    <div className='card'>
+    <div className='card_'>
      <img src={props.image}/>
-     <h3 style={{textAlign: "center"}}>{props.name}</h3>
+     <h5 style={{textAlign: "center"}}>{props.name}</h5>
      {isEmptyStock ?<h5 style={{textAlign: "center", color:"red"}}>Producto agotado.</h5>:<p style={{textAlign: "center"}}><strong>Disponibles:</strong> {props.stock}</p>}
      {isCartVisible ?<Link to={`/item/${props.id}`}>
             <h4 style={{textAlign: "center"}}>Ver producto</h4>
