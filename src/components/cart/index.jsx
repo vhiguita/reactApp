@@ -148,29 +148,30 @@ const Cart = () =>{
   return (
 
     <>
+    <div className="content">
     {isCartEmpty ?
       <div>
-          <Link to='/'><div style={{ padding: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '300px'}}><button style={{width: '200px', height: '60px', minWidth: '200px', display:'block'}}>Lista de productos</button></div></Link>
-          <div style={{ padding: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '300px'}}>El carro esta vacío.</div>
+          <Link to='/'><div className="center"><button style={{width: '200px', height: '60px', minWidth: '200px', display:'block'}}>Lista de productos</button></div></Link>
+          <div style={{ textAlign: "center"}}>El carro esta vacío.</div>
       </div>
-      :<div style={{ padding: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '300px'}}><button style={{width: '200px', height: '60px', minWidth: '200px', display:'block'}} onClick={clearCart}>Vaciar carrito</button></div>
+      :<div className="center"><button style={{width: '200px', height: '60px', minWidth: '200px', display:'block'}} onClick={clearCart}>Vaciar carrito</button></div>
     }
 
      <div>
      {isCartEmpty ?
        <>
        </>
-       :<form>
-       <div className="col-md-3">
+       :<form className="frm">
+       <div className="form-group">
          <input type="text" placeholder="Nombre" className="form-control" onChange={handleInputChange} name="name" />
        </div>
-       <div className="col-md-3">
+       <div className="form-group">
            <input type="text" placeholder="Teléfono" className="form-control" onChange={handleInputChange} name = "phone" />
         </div>
-        <div className="col-md-3">
+        <div className="form-group">
           <input type="text" placeholder="" className="form-control" value={email} name="email" readOnly/>
         </div>
-        <div className="col-md-3">
+        <div className="form-group">
           <input type="text" placeholder="Confirmar correo electrónico" className="form-control" onChange={handleInputChange} name="emailConfirmation" />
         </div>
        </form>
@@ -180,7 +181,7 @@ const Cart = () =>{
          :<h5 style={{textAlign: "center", color:"red"}}>{msg}</h5>
        }
 
-       <table id='product'>
+       <table id='products'>
                 <thead>
                   <tr>
                     <th>Cantidad</th>
@@ -212,16 +213,17 @@ const Cart = () =>{
        <>
        </>
        :<div>
-        <div style={{ textAlign: 'center', alignItems: 'center', justifyContent: 'center', width: '300px'}}>
+        <div style={{ textAlign: "center"}}>
          <strong>TOTAL = </strong> {formatter.format(totalPrice)}
         </div>
-        {isLogged ?<div style={{ padding: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '300px'}}><button style={{width: '100px', height: '60px', minWidth: '200px', display:'block'}} onClick={newOrder}>Finalizar compra</button></div>:<Link to='/login'><div style={{ padding: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '300px'}}><button style={{width: '100px', height: '60px', minWidth: '200px', display:'block'}}>Iniciar sesión</button></div></Link>}
+        {isLogged ?<div className="center"><button style={{width: '100px', height: '60px', minWidth: '200px', display:'block'}} onClick={newOrder}>Finalizar compra</button></div>:<Link to='/login'><div className="center"><button style={{width: '100px', height: '60px', minWidth: '200px', display:'block'}}>Iniciar sesión</button></div></Link>}
         </div>
      }
      {isOrderCreated ?
        <><h5 style={{textAlign: "center", color:"red"}}>Se ha generado la orden # {numOrder}.</h5></>
        :<></>
      }
+     </div>
     </>
 
   );

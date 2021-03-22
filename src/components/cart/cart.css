@@ -1,5 +1,21 @@
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap");
-
+.frm{
+  margin: auto;
+  text-align: center;
+  width: 50%;
+}
+.content{
+  margin:auto;
+  width: 100%;
+  text-align: center;
+  /*border: 1px solid black;*/
+}
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
 .card {
   border: 1px solid black;
   border-radius: 0.25rem;
@@ -11,22 +27,23 @@
   height: 300px;
   width: 200px;
 }
-#product {
+#products {
+  width: 100%;
   border-collapse: collapse;
   border: 3px solid #ddd;
 }
 
-#product td,
-#product th {
+#products td,
+#products th {
   border: 1px solid #ddd;
   padding: 12px;
 }
 
-#product tr:hover {
+#products tr:hover {
   background-color: #ddd;
 }
 
-#product th {
+#products th {
   padding: 10px;
   text-align: center;
   background-color: #4caf50;
@@ -52,4 +69,18 @@
 
 .button:active {
   border: 1px solid blue;
+}
+@media (max-width: 640px) {
+  .content{
+    margin-top: 20px;
+    width: 100%;
+  }
+  .frm{
+    margin-top: 20px;
+    width: 100%;
+  }
+  #products{
+       display: block;
+       overflow-x: auto;
+  }
 }

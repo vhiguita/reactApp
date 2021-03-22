@@ -1,0 +1,40 @@
+.content{
+  margin:auto;
+  width: 100%;
+  text-align: center;
+  /*border: 1px solid black;*/
+}
+
+#orders {
+  margin-top: 20px;
+  width: 100%;
+  border-collapse: collapse;
+  border: 3px solid #ddd;
+}
+
+#orders td,
+#orders th {
+  border: 1px solid #ddd;
+  padding: 12px;
+}
+
+#orders tr:hover {
+  background-color: #ddd;
+}
+
+#orders th {
+  padding: 10px;
+  text-align: center;
+  background-color: #4caf50;
+  color: white;
+}
+
+@media (max-width: 640px) {
+  .content{
+    width: 100%;
+  }
+  #orders{
+       display: block;
+       overflow-x: auto;
+  }
+}

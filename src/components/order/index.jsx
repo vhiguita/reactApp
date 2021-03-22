@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { getFirestore } from '../../firebase/index';
 import firebase from 'firebase/app';
 import '@firebase/firestore';
+import './order.css';
 
 const Order = (props) =>{
   const [noOrder, setNoOrder] = useState(false);
@@ -20,6 +21,7 @@ const Order = (props) =>{
     let email = window.localStorage.getItem('email');
     //const o_Collection = orderCollection.where('buyer.email','==','vhiguitacardona@gmail.com');
     if(email !== null){
+      //Obtener las ordenes o compras del usuario
       const o_Collection = orderCollection.where('buyer.email','==',email);
       o_Collection.get().then((d) =>{
           if(d.size === 0){
@@ -52,41 +54,33 @@ const Order = (props) =>{
   return (
 
     <>
-    <table id='product'>
-             <thead>
-               <tr>
-                 <th>Ref compra</th>
-                 <th>Detalle</th>
-                 <th>Total</th>
-                 <th>Fecha</th>
-                </tr>
-             </thead>
-             <tbody>
-             {orders.map((o)=>{
-               return (
-                 <tr key={o.id}>
-                     <td>{o.id}</td>
-                     <td>{o.detail}</td>
-                     <td>{formatter.format(o.total)}</td>
-                     <td>{new Date((o.date.toDate())).toString()}</td>
-                 </tr>
-                  // <tr key={prod.item.id}>
-                  //     <td>{prod.quantity}</td>
-                  //     <td>{prod.item.name}</td>
-                  //     <td>{formatter.format(prod.item.price)}</td>
-                  //     <td>{formatter.format(prod.item.price * prod.quantity)}</td>
-                  //     <td><img className="image" src={prod.item.image}/></td>
-                  //     <td className='opration'>
-                  //         <button onClick={()=>{removeItemFromCart(prod.item.id)}}>Eliminar</button>
-                  //     </td>
-                  // </tr>
-               )})}
-             </tbody>
-     </table>
-     {noOrder ?
-       <h5 style={{textAlign: "center", color:"red"}}>No hay pedidos.</h5>
-       :<></>
-     }
+    <div className="content">
+      <table id='orders'>
+               <thead>
+                 <tr>
+                   <th>Ref compra</th>
+                   <th>Detalle</th>
+                   <th>Total</th>
+                   <th>Fecha</th>
+                  </tr>
+               </thead>
+               <tbody>
+               {orders.map((o)=>{
+                 return (
+                   <tr key={o.id}>
+                       <td>{o.id}</td>
+                       <td>{o.detail}</td>
+                       <td>{formatter.format(o.total)}</td>
+                       <td>{new Date((o.date.toDate())).toString()}</td>
+                   </tr>
+                 )})}
+               </tbody>
+       </table>
+       {noOrder ?
+         <h5 style={{textAlign: "center", color:"red"}}>No hay pedidos.</h5>
+         :<></>
+       }
+     </div>
     </>
 
   );

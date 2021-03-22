@@ -1,5 +1,4 @@
 ul {
-  font-size: 0;
   list-style: none;
   width: 100%;
   display: block;  /* Remove bullet points; allow greater control of positioning */
