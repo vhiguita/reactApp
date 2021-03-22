@@ -16,8 +16,8 @@ const ItemDetail = ({item}) =>{
   const [isEmptyStock, setIsEmptyStock] = useState(false);
   const { addItem, product } = useContext(cartContext);
   useEffect(() => {
-    console.log("#########");
-    console.log(item.stock);
+    //console.log("#########");
+    //console.log(item.stock);
     if(item.stock===0){
         console.log("is empty");
         setIsEmptyStock(true);

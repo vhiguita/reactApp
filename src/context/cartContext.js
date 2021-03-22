@@ -141,6 +141,13 @@ function CartContext({children}){
     setNumProd(0);
     //console.log(product);
   }
+  const clearElements = () =>{
+    setProduct([]);
+    setTotalPrice(0);
+    setIsCartEmpty(true);
+    setNumProd(0);
+    //console.log(product);
+  }
   return (
 
     <cartContext.Provider value={{
@@ -148,6 +155,7 @@ function CartContext({children}){
       addItem,
       removeItem,
       clear,
+      clearElements,
       isCartEmpty,
       totalPrice,
       numProd,

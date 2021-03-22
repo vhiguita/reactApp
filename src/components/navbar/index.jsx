@@ -8,6 +8,7 @@ import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Image from 'react-bootstrap/Image';
 import CartWidget from './../cartwidget/index';
+import Order from './../order/index';
 import {cartContext} from '../../context/cartContext';
 import { getFirestore } from '../../firebase/index';
 import { NavItem } from 'react-bootstrap';
@@ -75,7 +76,7 @@ const NavbarComponent = () =>{
           </Nav>
 
         </Navbar.Collapse>
-        <NavItem>{ isCartEmpty ? <></> : <div className="cart rounded-circle">{numProd}</div>} <CartWidget/></NavItem>
+        <NavItem>{ isCartEmpty ? <></> : <div className="cart rounded-circle">{numProd}</div>} <CartWidget/><Link to={`/order`}>Pedidos</Link></NavItem>
       </Navbar>
    </>
 

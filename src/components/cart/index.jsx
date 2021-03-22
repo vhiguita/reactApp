@@ -8,9 +8,8 @@ import firebase from 'firebase/app';
 import '@firebase/firestore';
 
 const Cart = () =>{
-
   const cartContextUse = useContext(cartContext);
-  const { product, addItem, removeItem, clear, isCartEmpty, totalPrice } = useContext(cartContext);
+  const { product, addItem, removeItem, clear, clearElements, isCartEmpty, totalPrice } = useContext(cartContext);
   const formatter = new Intl.NumberFormat('en-US', {
      style: 'currency',
      currency: 'USD',
@@ -18,11 +17,13 @@ const Cart = () =>{
   });
   const [numOrder, setNumOrder] = useState('');
   const [msg, setMsg] = useState('');
+  const [email, setEmail] = useState('');
   const [isOrderCreated, setOrderCreated] = useState(false);
+  const [isLogged, setIsLogged] = useState(false);
   const [isVal, setIsVal] = useState(true);
   const [datos, setDatos] = useState({
         name: '',
-        email: '',
+        //email: '',
         emailConfirmation: '',
         phone: ''
    });
@@ -34,6 +35,20 @@ const Cart = () =>{
              [event.target.name] : event.target.value
          })
     }
+    let mail = window.localStorage.getItem('email');
+    console.log('mail:'+mail);
+    useEffect(() => {
+       if(mail !== null){
+          setEmail(mail);
+          setIsLogged(true);
+       }else{
+          setEmail('');
+          setIsLogged(false);
+       }
+       if(isCartEmpty){
+          setMsg('');
+       }
+     }, []);
   // useEffect(() => {
   //   //console.log(id);
   //   let total =0;
@@ -50,6 +65,7 @@ const Cart = () =>{
   // }, []);
   function clearCart(){
     console.log('Vaciando carro de compras:');
+    setMsg('');
     clear();
   }
   function removeItemFromCart(id,q){
@@ -60,8 +76,8 @@ const Cart = () =>{
    // setIsValid(true);
    let isValid = true;
    let msg = '';
-   console.log('enviando datos...' + datos.name + ' ' + datos.email + ' ' + datos.phone);
-   console.log(datos.name);
+   //console.log('enviando datos...' + datos.name + ' ' + datos.email + ' ' + datos.phone);
+   //console.log(datos.name);
 
     if (datos.name === '' || datos.name === null) {
         msg = msg + 'El nombre no puede ser vacío';
@@ -75,14 +91,29 @@ const Cart = () =>{
       }
       isValid = false;
     }
-    if (datos.email === '' || datos.email === null) {
-      if(msg===''){
-        msg = msg + 'El correo electrónico no puede ser vacío';
-      }else{
-        msg = msg + ', el correo electrónico no puede ser vacío';
-      }
-      isValid = false;
-    }else if(datos.email !== datos.emailConfirmation) {
+    // if (datos.email === '' || datos.email === null) {
+    //   if(msg===''){
+    //     msg = msg + 'El correo electrónico no puede ser vacío';
+    //   }else{
+    //     msg = msg + ', el correo electrónico no puede ser vacío';
+    //   }
+    //   isValid = false;
+    // }else if(datos.email !== datos.emailConfirmation) {
+    //   if(msg===''){
+    //     msg = msg + 'Ambos correos electrónicos deben coincidir';
+    //   }else{
+    //     msg = msg + ', ambos correos electrónicos deben coincidir';
+    //   }
+    //   isValid = false;
+    // }
+    if (datos.emailConfirmation === '' || datos.emailConfirmation === null) {
+     if(msg===''){
+       msg = msg + 'El correo electrónico de confirmación no puede ser vacío';
+     }else{
+       msg = msg + ', el correo electrónico de confirmación no puede ser vacío';
+     }
+     isValid = false;
+   }else if(email !== datos.emailConfirmation) {
       if(msg===''){
         msg = msg + 'Ambos correos electrónicos deben coincidir';
       }else{
@@ -96,7 +127,7 @@ const Cart = () =>{
       const db = getFirestore();
       const orders = db.collection("orders");
       const newOrder_ = {
-        buyer:{ name: datos.name, phone: datos.phone, email: datos.email},
+        buyer:{ name: datos.name, phone: datos.phone, email: datos.emailConfirmation},
         items: product,
         date:firebase.firestore.Timestamp.fromDate(new Date()),
         total: totalPrice,
@@ -107,7 +138,7 @@ const Cart = () =>{
         setTimeout(() => setOrderCreated(false),
           5000
         );
-        clear();
+        clearElements();
       }).catch(err => {
          console.log(err);
       }).finally(() => {
@@ -127,7 +158,7 @@ const Cart = () =>{
     <>
     {isCartEmpty ?
       <div>
-          <Link to='/'><div style={{ padding: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '300px'}}><button style={{width: '100px', height: '60px', minWidth: '200px', display:'block'}}>Relojes</button></div></Link>
+          <Link to='/'><div style={{ padding: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '300px'}}><button style={{width: '100px', height: '60px', minWidth: '200px', display:'block'}}>Lista de productos</button></div></Link>
           <div style={{ padding: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '300px'}}>El carro esta vacío.</div>
       </div>
       :<div style={{ padding: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '300px'}}><button style={{width: '100px', height: '60px', minWidth: '200px', display:'block'}} onClick={clearCart}>Vaciar carrito</button></div>
@@ -145,10 +176,10 @@ const Cart = () =>{
            <input type="text" placeholder="Teléfono" className="form-control" onChange={handleInputChange} name = "phone" />
         </div>
         <div className="col-md-3">
-          <input type="text" placeholder="Email" className="form-control" onChange={handleInputChange} name="email" />
+          <input type="text" placeholder="" className="form-control" value={email} name="email" readOnly/>
         </div>
         <div className="col-md-3">
-          <input type="text" placeholder="Confirm Email" className="form-control" onChange={handleInputChange} name="emailConfirmation" />
+          <input type="text" placeholder="Confirmar correo electrónico" className="form-control" onChange={handleInputChange} name="emailConfirmation" />
         </div>
        </form>
        }
@@ -192,7 +223,7 @@ const Cart = () =>{
         <div style={{ textAlign: 'center', alignItems: 'center', justifyContent: 'center', width: '300px'}}>
          <strong>TOTAL = </strong> {formatter.format(totalPrice)}
         </div>
-        <div style={{ padding: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '300px'}}><button style={{width: '100px', height: '60px', minWidth: '200px', display:'block'}} onClick={newOrder}>Finalizar compra</button></div>
+        {isLogged ?<div style={{ padding: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '300px'}}><button style={{width: '100px', height: '60px', minWidth: '200px', display:'block'}} onClick={newOrder}>Finalizar compra</button></div>:<Link to='/login'><div style={{ padding: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '300px'}}><button style={{width: '100px', height: '60px', minWidth: '200px', display:'block'}}>Iniciar sesión</button></div></Link>}
         </div>
      }
      {isOrderCreated ?

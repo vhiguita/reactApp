@@ -3,5 +3,6 @@
   height: 30px;
   background-color: orange;
   text-align: center;
-  margin: auto;
+  /*margin: auto;*/
+  margin-left: 10px;
 }
