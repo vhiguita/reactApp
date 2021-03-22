@@ -4,9 +4,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { getFirestore } from '../../firebase/index';
 import firebase from 'firebase/app';
 import '@firebase/firestore';
+import {cartContext} from '../../context/cartContext';
 
 const Login = () =>{
   const history = useHistory();
+  const { setLogged } = useContext(cartContext);
   const [datos, setDatos] = useState({
         email: '',
         pwd: ''
@@ -25,9 +27,13 @@ const Login = () =>{
     event.preventDefault();
     let isValid = true;
     let msg = '';
+    let regex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
     //alert('enviando datos...' + datos.email + ' ' + datos.pwd);
     if (datos.email === '' || datos.email === null) {
       msg = msg + 'El correo electrónico no puede ser vacío';
+      isValid = false;
+    }else if(!regex.test(datos.email)){
+      msg = msg + 'El correo electrónico es incorrecto';
       isValid = false;
     }
     if (datos.pwd === '' || datos.pwd === null) {
@@ -50,6 +56,7 @@ const Login = () =>{
             setMsg(msg);
           }else{
             window.localStorage.setItem('email', datos.email);
+            setLogged(true);
             setIsVal(true);
             setMsg('');
             history.push('/cart');

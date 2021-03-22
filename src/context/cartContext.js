@@ -1,33 +1,27 @@
 import React, {createContext, useState} from 'react';
 import { getFirestore } from '../firebase/index';
-import firebase from 'firebase/app';
+//import firebase from 'firebase/app';
 import '@firebase/firestore';
 
 export const cartContext = createContext();
-//const[product,setProduct] = useState([]);
-// export const getCartContext = () => {
-//   return useContext(cartContext);
-// }
 
 function CartContext({children}){
-//const CartContext = ({children}) =>{
   const[isCartEmpty,setIsCartEmpty] = useState(true);
   const[product,setProduct] = useState([]);
   const[totalPrice, setTotalPrice] = useState(0);
   const[numProd, setNumProd] = useState(0);
+  const [isLogged, setIsLogged] = useState(false); //Si el usuario esta logeado o no
   //const [nStock, setStock] = useState(item.item.stock); //Stock disponible
 
+  //Agregar nuevo item al carro de compras
   const addItem = (item) => {
     console.log(item);
     console.log('id='+item.item.id);
     const b = isInCart(item.item.id);
     const q = item.quantity;
     const db = getFirestore();
-    //console.log(item);
+
     let prodId = item.item.id;
-    //console.log(item.item.stock);
-    //let stock = item.item.stock - q;
-    //console.log(stock);
     let docRef = db.collection("items").doc(prodId);
 
     let updateStock = docRef.update({
@@ -73,6 +67,7 @@ function CartContext({children}){
     setNumProd(n);
     console.log("cantidad de productos:"+n);
   }
+  //Eliminar un item del carro de compras
   const removeItem = (id, q) =>{
     console.log(id);
     console.log(q);
@@ -116,10 +111,17 @@ function CartContext({children}){
     }).finally(() =>{
     });
   }
+  //Si el item ya esta en el carro de compras
   const isInCart = (id) =>{
     //console.log(product);
     return product.findIndex(prod =>prod.item.id === id);
   }
+  //Si un usuario esta logeado o no
+  const setLogged = (b)=>{
+    //console.log(product);
+    setIsLogged(b);
+  }
+  //Limpiar carro de compras
   const clear = () =>{
     let i = 0;
     const db = getFirestore();
@@ -141,6 +143,8 @@ function CartContext({children}){
     setNumProd(0);
     //console.log(product);
   }
+
+  //Limpiar carro de compras al finalizar la orden de compra
   const clearElements = () =>{
     setProduct([]);
     setTotalPrice(0);
@@ -159,6 +163,8 @@ function CartContext({children}){
       isCartEmpty,
       totalPrice,
       numProd,
+      isLogged,
+      setLogged,
      }}>
      {children}
     </cartContext.Provider>

@@ -27,10 +27,7 @@ const Register = () =>{
     event.preventDefault();
     let isValid = true;
     let msg = '';
-    //setIsVal(true);
-    //setMsg('');
-    console.log(isValid);
-    console.log('enviando datos...' + datos.email + ',pwd: ' + datos.pwd+ ',pwdConfirmation: ' + datos.pwdConfirmation);
+    let regex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
     if (datos.name === '' || datos.name === null) {
         msg = msg + 'El nombre no puede ser vacío';
         isValid = false;
@@ -40,6 +37,13 @@ const Register = () =>{
         msg = msg + 'El correo electrónico no puede ser vacío';
       }else{
         msg = msg + ', el correo electrónico no puede ser vacío';
+      }
+      isValid = false;
+    }else if(!regex.test(datos.email)){
+      if(msg===''){
+        msg = msg + 'El correo electrónico es incorrecto';
+      }else{
+        msg = msg + ', el correo electrónico es incorrecto';
       }
       isValid = false;
     }
@@ -75,13 +79,8 @@ const Register = () =>{
               password: datos.pwd,
               registerDate:firebase.firestore.Timestamp.fromDate(new Date()),
             }
+            //Insertar nuevo usuario en la base de datos que se ha registrado
             oUser.add(newUser).then(({ id }) =>{
-              /*setDatos({
-                    name: '',
-                    email: '',
-                    pwd: '',
-                    pwdConfirmation: ''
-               });*/
               alert("El usuario se ha registrado con éxito ahora puede iniciar sesión.");
               event.target.reset();
 

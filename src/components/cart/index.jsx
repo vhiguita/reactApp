@@ -9,7 +9,7 @@ import '@firebase/firestore';
 
 const Cart = () =>{
   const cartContextUse = useContext(cartContext);
-  const { product, addItem, removeItem, clear, clearElements, isCartEmpty, totalPrice } = useContext(cartContext);
+  const { product, addItem, removeItem, clear, clearElements, isCartEmpty, totalPrice, isLogged } = useContext(cartContext);
   const formatter = new Intl.NumberFormat('en-US', {
      style: 'currency',
      currency: 'USD',
@@ -19,7 +19,7 @@ const Cart = () =>{
   const [msg, setMsg] = useState('');
   const [email, setEmail] = useState('');
   const [isOrderCreated, setOrderCreated] = useState(false);
-  const [isLogged, setIsLogged] = useState(false);
+  //const [isLogged, setIsLogged] = useState(false);
   const [isVal, setIsVal] = useState(true);
   const [datos, setDatos] = useState({
         name: '',
@@ -40,10 +40,10 @@ const Cart = () =>{
     useEffect(() => {
        if(mail !== null){
           setEmail(mail);
-          setIsLogged(true);
+          //setIsLogged(true);
        }else{
           setEmail('');
-          setIsLogged(false);
+          //setIsLogged(false);
        }
        if(isCartEmpty){
           setMsg('');
@@ -72,12 +72,12 @@ const Cart = () =>{
     //alert(id);
     removeItem(id,q);
   }
+  //Generar nueva orden de compra
   function newOrder(){
    // setIsValid(true);
-   let isValid = true;
-   let msg = '';
-   //console.log('enviando datos...' + datos.name + ' ' + datos.email + ' ' + datos.phone);
-   //console.log(datos.name);
+    let isValid = true;
+    let msg = '';
+    let regex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
 
     if (datos.name === '' || datos.name === null) {
         msg = msg + 'El nombre no puede ser vacío';
@@ -91,26 +91,18 @@ const Cart = () =>{
       }
       isValid = false;
     }
-    // if (datos.email === '' || datos.email === null) {
-    //   if(msg===''){
-    //     msg = msg + 'El correo electrónico no puede ser vacío';
-    //   }else{
-    //     msg = msg + ', el correo electrónico no puede ser vacío';
-    //   }
-    //   isValid = false;
-    // }else if(datos.email !== datos.emailConfirmation) {
-    //   if(msg===''){
-    //     msg = msg + 'Ambos correos electrónicos deben coincidir';
-    //   }else{
-    //     msg = msg + ', ambos correos electrónicos deben coincidir';
-    //   }
-    //   isValid = false;
-    // }
     if (datos.emailConfirmation === '' || datos.emailConfirmation === null) {
      if(msg===''){
        msg = msg + 'El correo electrónico de confirmación no puede ser vacío';
      }else{
        msg = msg + ', el correo electrónico de confirmación no puede ser vacío';
+     }
+     isValid = false;
+   }else if(!regex.test(datos.emailConfirmation)){
+     if(msg===''){
+       msg = msg + 'El correo electrónico es incorrecto';
+     }else{
+       msg = msg + ', el correo electrónico es incorrecto';
      }
      isValid = false;
    }else if(email !== datos.emailConfirmation) {
