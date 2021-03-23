@@ -36,7 +36,7 @@ const Cart = () =>{
          })
     }
     let mail = window.localStorage.getItem('email');
-    console.log('mail:'+mail);
+    //console.log('mail:'+mail);
     useEffect(() => {
        if(mail !== null){
           setEmail(mail);
@@ -113,8 +113,8 @@ const Cart = () =>{
       }
       isValid = false;
     }
-    console.log(isValid);
-    console.log(msg);
+    //console.log(isValid);
+    //console.log(msg);
     if(isValid){
       const db = getFirestore();
       const orders = db.collection("orders");

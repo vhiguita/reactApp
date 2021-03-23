@@ -4,7 +4,7 @@ import Item from '../item/index';
 import './itemlist.css';
 
 const ItemList = ({products}) =>{
-  console.log(products);
+  //console.log(products);
   return (
     <>
       <div>

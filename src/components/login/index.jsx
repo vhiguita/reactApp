@@ -17,8 +17,8 @@ const Login = () =>{
   const [msg, setMsg] = useState('');
   const [isVal, setIsVal] = useState(true);
   const handleInputChange = (event) => {
-        console.log(event.target.name)
-        console.log(event.target.value)
+        //console.log(event.target.name)
+        //console.log(event.target.value)
         setDatos({
             ...datos,
             [event.target.name] : event.target.value
@@ -51,7 +51,7 @@ const Login = () =>{
       const o_User = itemUser.where('email','==',datos.email).where('password', '==', datos.pwd);
       o_User.get().then((d) =>{
           if(d.size === 0){
-            console.log('No results!');
+            //console.log('No results!');
             msg = "El usuario no esta registrado o los datos ingresados no son correctos";
             setIsVal(false);
             setMsg(msg);

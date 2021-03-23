@@ -15,8 +15,8 @@ function CartContext({children}){
 
   //Agregar nuevo item al carro de compras
   const addItem = (item) => {
-    console.log(item);
-    console.log('id='+item.item.id);
+    //console.log(item);
+    //console.log('id='+item.item.id);
     const b = isInCart(item.item.id);
     const q = item.quantity;
     const db = getFirestore();
@@ -32,7 +32,7 @@ function CartContext({children}){
     if(b === -1){
        //console.log(item);
        item.item.stock = item.item.stock - q;
-       console.log(item);
+       //console.log(item);
        product.push(item);
        //console.log(product);
        setProduct(product);
@@ -40,7 +40,7 @@ function CartContext({children}){
     }else{
       let i = 0;
       while(i<product.length){
-        console.log(product[i].item);
+        //console.log(product[i].item);
         if(product[i].item.id === item.item.id){
           product[i].quantity = product[i].quantity + q;
           product[i].item.stock = product[i].item.stock - q;
@@ -48,7 +48,7 @@ function CartContext({children}){
         }
         i = i + 1;
       }
-      console.log(product);
+      //console.log(product);
       setProduct(product);
       setIsCartEmpty(false);
     }
@@ -59,13 +59,13 @@ function CartContext({children}){
     while(j<product.length){
       let price = product[j].item.price * product[j].quantity;
       n = n + product[j].quantity;
-      console.log(price);
+      //console.log(price);
       total = total + price;
       j = j + 1;
     }
     setTotalPrice(total);
     setNumProd(n);
-    console.log("cantidad de productos:"+n);
+    //console.log("cantidad de productos:"+n);
   }
   //Eliminar un item del carro de compras
   const removeItem = (id, q) =>{
@@ -83,19 +83,19 @@ function CartContext({children}){
     while(j<newProducList.length){
       let price = newProducList[j].item.price * newProducList[j].quantity;
       n = n + newProducList[j].quantity;
-      console.log(price);
+      //console.log(price);
       total = total + price;
       j = j + 1;
     }
     setTotalPrice(total);
     setNumProd(n);
-    console.log("cantidad de productos:"+n);
+    //console.log("cantidad de productos:"+n);
     const db = getFirestore();
     const itemCollection = db.collection("items");
     itemCollection.doc(id).get().then((d) =>{
       if (d.exists) {
-         console.log(d.data());
-         console.log(d.data().stock);
+         //console.log(d.data());
+         //console.log(d.data().stock);
          let docRef = itemCollection.doc(id);
 
          let updateStock = docRef.update({
@@ -116,7 +116,7 @@ function CartContext({children}){
     //console.log(product);
     return product.findIndex(prod =>prod.item.id === id);
   }
-  //Si un usuario esta logeado o no
+  //Si un usuario esta logeado o no en la plataforma
   const setLogged = (b)=>{
     //console.log(product);
     setIsLogged(b);
@@ -128,8 +128,8 @@ function CartContext({children}){
     const itemCollection = db.collection("items");
     while(i<product.length){
       let id = product[i].item.id;
-      console.log(id);
-      console.log(i);
+      //console.log(id);
+      //console.log(i);
       let docRef = db.collection("items").doc(id);
 
       let updateStock = docRef.update({

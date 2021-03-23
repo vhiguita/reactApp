@@ -43,7 +43,7 @@ const ItemListContainer = ({greeting}) =>{
     let products;
     const db = getFirestore();
     const itemCollection = db.collection("items");
-    console.log(itemCollection)
+    //console.log(itemCollection)
     if (typeof(categoryId) !== 'undefined' && categoryId != null) {
       const categoryCollection = itemCollection.where('categoryName','==',categoryId);
       categoryCollection.get().then((querySnapshot) =>{
@@ -73,8 +73,8 @@ const ItemListContainer = ({greeting}) =>{
 
               return { ...doc.data(), id: doc.id };
          });
-         console.log('---ITEMS-------');
-         console.log(aux);
+         //console.log('---ITEMS-------');
+         //console.log(aux);
          setProducts(aux);
       }).catch((error) =>{
         console.log(error);

@@ -19,14 +19,13 @@ const ItemDetail = ({item}) =>{
     //console.log("#########");
     //console.log(item.stock);
     if(item.stock===0){
-        console.log("is empty");
+        //console.log("is empty");
         setIsEmptyStock(true);
     }
   }, [item]);
 
   function onAdd(q){
     alert('agregando  al carrito: '+q);
-    //setQuantity(q);
     setGoCart(true);
     addItem( {item:item, quantity:q} );
   }

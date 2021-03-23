@@ -6,7 +6,7 @@ import './item.css';
 const Item = (props) =>{
   const [isCartVisible, setIsCartVisible] = useState(true);
   const [isEmptyStock, setIsEmptyStock] = useState(false);
-  console.log(props);
+  //console.log(props);
  // const formatter = new Intl.NumberFormat('en-US', {
  //     style: 'currency',
  //     currency: 'USD',

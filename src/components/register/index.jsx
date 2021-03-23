@@ -16,9 +16,9 @@ const Register = () =>{
         pwdConfirmation: ''
    });
    const handleInputChange = (event) => {
-         console.log(datos);
-         console.log(event.target.name)
-         console.log(event.target.value)
+         //console.log(datos);
+         //console.log(event.target.name)
+         //console.log(event.target.value)
          setDatos({
              ...datos,
              [event.target.name] : event.target.value
@@ -63,7 +63,7 @@ const Register = () =>{
       }
       isValid = false;
     }
-    console.log(isValid);
+    //console.log(isValid);
     if(isValid){
       const db = getFirestore();
       const oUser = db.collection("users");

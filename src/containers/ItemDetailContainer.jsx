@@ -10,7 +10,7 @@ const ItemDetailContainer = () =>{
   const [item, setItem] = useState({});
   const [productNotFound, setProductNotFound] = useState(false);
   useEffect(() => {
-    console.log(id);
+    //console.log(id);
     // const promesa = new Promise ((resolve, reject) => {
     //    setTimeout( () => {
     //     resolve(
@@ -37,13 +37,13 @@ const ItemDetailContainer = () =>{
       itemCollection.doc(id).get().then((d) =>{
         if (d.exists) {
            product = { ...d.data(), id: d.id };
-           console.log('--- { ITEM } ---');
-           console.log("Document data:", product);
+           //console.log('--- { ITEM } ---');
+           //console.log("Document data:", product);
            setItem(product);
            setProductNotFound(false);
          } else {
              // doc.data() will be undefined in this case
-             console.log("No such document!");
+             //console.log("No such document!");
              setProductNotFound(true);
          }
 

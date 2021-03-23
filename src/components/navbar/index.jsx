@@ -53,8 +53,8 @@ const NavbarComponent = () =>{
 
             return { ...doc.data(), categoryId: doc.id };
        });
-       console.log('---CAT-------');
-       console.log(aux);
+       //console.log('---CAT-------');
+       //console.log(aux);
        setCategory(aux);
     }).catch((error) =>{
       console.log(error);
